@@ -1,61 +1,10 @@
-[![Join the chat at https://gitter.im/copy/v86](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/copy/v86) or #v86 on [irc.libera.chat](https://libera.chat/)
-
 v86 emulates an x86-compatible CPU and hardware. Machine code is translated to
 WebAssembly modules at runtime in order to achieve decent performance. Here's a
 list of emulated hardware:
 
-- An x86-compatible CPU. The instruction set is around Pentium 4 level,
-  including full SSE3 support. Some features are missing, in particular:
-  - Task gates, far calls in protected mode
-  - Some 16 bit protected mode features
-  - Single stepping (trap flag, debug registers)
-  - Some exceptions, especially floating point and SSE
-  - Multicore
-  - 64-bit extensions
-- A floating point unit (FPU). Calculations are done using the Berkeley
-  SoftFloat library and therefore should be precise (but slow). Trigonometric
-  and log functions are emulated using 64-bit floats and may be less precise.
-  Not all FPU exceptions are supported.
-- A floppy disk controller (8272A).
-- An 8042 Keyboard Controller, PS2. With mouse support.
-- An 8254 Programmable Interval Timer (PIT).
-- An 8259 Programmable Interrupt Controller (PIC).
-- Partial APIC support.
-- A CMOS Real Time Clock (RTC).
-- A generic VGA card with SVGA support and Bochs VBE Extensions.
-- A PCI bus. This one is partly incomplete and not used by every device.
-- An IDE disk controller.
-- An NE2000 (RTL8390) PCI network card.
-- A VirtIO filesystem.
-- A SoundBlaster 16 sound card.
+## About V86 Lite
 
-## Demos
-
-[9front](https://copy.sh/v86/?profile=9front) —
-[Arch Linux](https://copy.sh/v86/?profile=archlinux) —
-[Android-x86 1.6-r2](https://copy.sh/v86?profile=android) —
-[Android-x86 4.4-r2](https://copy.sh/v86?profile=android4) —
-[BasicLinux](https://copy.sh/v86/?profile=basiclinux) —
-[Buildroot Linux](https://copy.sh/v86/?profile=buildroot) —
-[Damn Small Linux](https://copy.sh/v86/?profile=dsl) —
-[ELKS](https://copy.sh/v86/?profile=elks) —
-[FreeDOS](https://copy.sh/v86/?profile=freedos) —
-[FreeBSD](https://copy.sh/v86/?profile=freebsd) —
-[FiwixOS](https://copy.sh/v86/?profile=fiwix) —
-[Haiku](https://copy.sh/v86/?profile=haiku) —
-[SkiffOS](https://copy.sh/v86/?profile=copy/skiffos) —
-[ReactOS](https://copy.sh/v86/?profile=reactos) —
-[Windows 2000](https://copy.sh/v86/?profile=windows2000) —
-[Windows 98](https://copy.sh/v86/?profile=windows98) —
-[Windows 95](https://copy.sh/v86/?profile=windows95) —
-[Windows 1.01](https://copy.sh/v86/?profile=windows1) —
-[MS-DOS 6.22](https://copy.sh/v86/?profile=msdos) —
-[OpenBSD](https://copy.sh/v86/?profile=openbsd) —
-[Oberon](https://copy.sh/v86/?profile=oberon) —
-[KolibriOS](https://copy.sh/v86/?profile=kolibrios) —
-[SkiftOS](https://copy.sh/v86?profile=skift) —
-[QNX](https://copy.sh/v86/?profile=qnx)
-
+hi
 ## Documentation
 
 [How it works](docs/how-it-works.md) —
