@@ -1,0 +1,165 @@
+<!doctype html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Readme</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="description" content="Run KolibriOS, Linux or Windows 98 in your browser">
+
+<script src="build/v86_all.js"></script>
+<link rel="stylesheet" href="v86.css">
+
+<div>
+    <p>v86 emulates an x86-compatible CPU and hardware. Machine code is translated to
+        WebAssembly modules at runtime in order to achieve decent performance. Here&#39;s a
+        list of emulated hardware:</p>
+        <h2 id="about-v86-lite">About V86 Lite</h2>
+        <p>hi</p>
+        <h2 id="documentation">Documentation</h2>
+        <p><a href="docs/how-it-works.md">How it works</a> —
+        <a href="docs/networking.md">Networking</a> —
+        <a href="tools/docker/alpine/">Alpine Linux guest setup</a> —
+        <a href="docs/archlinux.md">Arch Linux guest setup</a> —
+        <a href="docs/windows-xp.md">Windows 2000/XP guest setup</a> —
+        <a href="docs/filesystem.md">9p filesystem</a> —
+        <a href="docs/linux-9p-image.md">Linux rootfs on 9p</a> —
+        <a href="docs/profiling.md">Profiling</a> —
+        <a href="docs/cpu-idling.md">CPU Idling</a></p>
+        <h2 id="compatibility">Compatibility</h2>
+        <p>Here&#39;s an overview of the operating systems supported in v86:</p>
+        <ul>
+        <li>Linux works pretty well. 64-bit kernels are not supported.<ul>
+        <li>Damn Small Linux (2.4.31 kernel) works.</li>
+        <li>Fedora 30 works.</li>
+        <li>All tested versions of TinyCore work.</li>
+        <li><a href="https://buildroot.uclibc.org">Buildroot</a> can be used to build a minimal image.
+        <a href="https://github.com/humphd/browser-vm">humphd/browser-vm</a> and
+        <a href="https://github.com/Darin755/browser-buildroot">darin755/browser-buildroot</a> have some useful scripts for building one.</li>
+        <li><a href="https://github.com/skiffos/SkiffOS/tree/master/configs/browser/v86">SkiffOS</a> (based on Buildroot) can cross-compile a custom image.</li>
+        <li>Arch Linux 32 works. See <a href="docs/archlinux.md">archlinux.md</a> for building an image.</li>
+        <li>Debian works.</li>
+        <li>Ubuntu works up to the latest version that supported i386 (16.04 LTS or 18.04 LTS for some variants).</li>
+        <li>Alpine Linux works. An image can be built from a Dockerfile, see <a href="tools/docker/alpine/">tools/docker/alpine/</a>.</li>
+        <li>Slackware works.</li>
+        <li>Void Linux works.</li>
+        </ul>
+        </li>
+        <li>ReactOS works.</li>
+        <li>FreeDOS, Windows 1.01 and MS-DOS run very well.</li>
+        <li>KolibriOS works.</li>
+        <li>Haiku works.</li>
+        <li>Android-x86 has been tested up to 4.4-r2.</li>
+        <li>Windows 1, 3.x, 95, 98, ME, NT and 2000 work reasonably well.<ul>
+        <li>In Windows 2000 and higher the PC type has to be changed from ACPI PC to Standard PC</li>
+        <li>There are some known boot issues (<a href="https://github.com/copy/v86/issues/250">#250</a>, <a href="https://github.com/copy/v86/issues/433">#433</a>, <a href="https://github.com/copy/v86/issues/507">#507</a>, <a href="https://github.com/copy/v86/issues/555">#555</a>, <a href="https://github.com/copy/v86/issues/620">#620</a>, <a href="https://github.com/copy/v86/issues/645">#645</a>)</li>
+        </ul>
+        </li>
+        <li>Windows XP, Vista and 8 work under certain conditions (see <a href="https://github.com/copy/v86/issues/86">#86</a>, <a href="https://github.com/copy/v86/issues/208">#208</a>)<ul>
+        <li>See <a href="docs/windows-xp.md">Windows 2000/XP guest setup</a></li>
+        </ul>
+        </li>
+        <li>Many hobby operating systems work.</li>
+        <li>9front works.</li>
+        <li>Plan 9 doesn&#39;t work.</li>
+        <li>QNX works.</li>
+        <li>OS/2 doesn&#39;t work.</li>
+        <li>FreeBSD works.</li>
+        <li>OpenBSD works with a specific boot configuration. At the <code>boot&gt;</code> prompt type
+        <code>boot -c</code>, then at the <code>UKC&gt;</code> prompt <code>disable mpbios</code> and <code>exit</code>.</li>
+        <li>NetBSD works only with a custom kernel, see <a href="https://github.com/copy/v86/issues/350">#350</a>.</li>
+        <li>SerenityOS works (only 32-bit versions).</li>
+        <li><a href="https://skiftos.org/">SkiftOS</a> works.</li>
+        </ul>
+        <p>You can get some information on the disk images here: <a href="https://github.com/copy/images">https://github.com/copy/images</a>.</p>
+        <h2 id="how-to-build-run-and-embed-">How to build, run and embed?</h2>
+        <p>You need:</p>
+        <ul>
+        <li>make</li>
+        <li>Rust with the wasm32-unknown-unknown target</li>
+        <li>A version of clang compatible with Rust</li>
+        <li>java (for Closure Compiler, not necessary when using <code>debug.html</code>)</li>
+        <li>nodejs (a recent version is required, v16.11.1 is known to be working)</li>
+        <li>To run tests: nasm, gdb, qemu-system, gcc, libc-i386 and rustfmt</li>
+        </ul>
+        <p>See <a href="tools/docker/test-image/Dockerfile">tools/docker/test-image/Dockerfile</a>
+        for a full setup on Debian or
+        <a href="https://docs.microsoft.com/en-us/windows/wsl/install">WSL</a>.</p>
+        <ul>
+        <li>Run <code>make</code> to build the debug build (at <code>debug.html</code>).</li>
+        <li>Run <code>make all</code> to build the optimized build (at <code>index.html</code>).</li>
+        <li>ROM and disk images are loaded via XHR, so if you want to try out <code>index.html</code>
+        locally, make sure to serve it from a local webserver. You can use <code>make run</code>
+        to serve the files using Python&#39;s http module.</li>
+        <li>If you only want to embed v86 in a webpage you can use libv86.js. For usage,
+        check out the <a href="examples/">examples</a>. You can download it from the release section.</li>
+        </ul>
+        <h3 id="alternatively-to-build-using-docker">Alternatively, to build using Docker</h3>
+        <ul>
+        <li>If you have Docker installed, you can run the whole system inside a container.</li>
+        <li>See <code>tools/docker/exec</code> to find the Dockerfile required for this.</li>
+        <li>You can run <code>docker build -f tools/docker/exec/Dockerfile -t v86:alpine-3.19 .</code> from the root directory to generate docker image.</li>
+        <li>Then you can simply run <code>docker run -it -p 8000:8000 v86:alpine-3.19</code> to start the server.</li>
+        <li>Check <code>localhost:8000</code> for hosted server.</li>
+        </ul>
+        <h3 id="running-via-dev-container">Running via Dev Container</h3>
+        <ul>
+        <li>If you are using an IDE that supports Dev Containers, such as GitHub Codespaces, the Visual Studio Code Remote Container extension, or possibly others such as Jetbrains&#39; IntelliJ IDEA, you can setup the development environment in a Dev Container.</li>
+        <li>Follow the instructions from your development environment to setup the container.</li>
+        <li>Run the Task &quot;Fetch images&quot; in order to download images for testing.</li>
+        </ul>
+        <h2 id="testing">Testing</h2>
+        <p>The disk images for testing are not included in this repository. You can
+        download them directly from the website using:</p>
+        <p><code>wget -P images/ https://i.copy.sh/{linux3.iso,linux.iso,linux4.iso,buildroot-bzimage68.bin,openbsd-floppy.img,kolibri.img,windows101.img,os8.img,freedos722.img}</code></p>
+        <p>Run integration tests: <code>make tests</code></p>
+        <p>Run all tests: <code>make jshint rustfmt kvm-unit-test nasmtests nasmtests-force-jit expect-tests jitpagingtests qemutests rust-test tests</code></p>
+        <p>See <a href="tests/Readme.md">tests/Readme.md</a> for more information.</p>
+        <h2 id="api-examples">API examples</h2>
+        <ul>
+        <li><a href="examples/basic.html">Basic</a></li>
+        <li><a href="examples/serial.html">Programatically using the serial terminal</a></li>
+        <li><a href="examples/lua.html">A Lua interpreter</a></li>
+        <li><a href="examples/two_instances.html">Two instances in one window</a></li>
+        <li><a href="examples/save_restore.html">Saving and restoring emulator state</a></li>
+        </ul>
+        <p>Using v86 for your own purposes is as easy as:</p>
+        <pre><code class="lang-javascript">var emulator = new V86({
+        <span class="hljs-symbol">    screen_container:</span> document.getElementById(<span class="hljs-string">"screen_container"</span>),
+        <span class="hljs-symbol">    bios:</span> {
+        <span class="hljs-symbol">        url:</span> <span class="hljs-string">"../../bios/seabios.bin"</span>,
+            },
+        <span class="hljs-symbol">    vga_bios:</span> {
+        <span class="hljs-symbol">        url:</span> <span class="hljs-string">"../../bios/vgabios.bin"</span>,
+            },
+        <span class="hljs-symbol">    cdrom:</span> {
+        <span class="hljs-symbol">        url:</span> <span class="hljs-string">"../../images/linux.iso"</span>,
+            },
+        <span class="hljs-symbol">    autostart:</span> true,
+        });
+        </code></pre>
+        <p>See <a href="src/browser/starter.js">starter.js</a>.</p>
+        <h2 id="license">License</h2>
+        <p>v86 is distributed under the terms of the Simplified BSD License, see
+        <a href="LICENSE">LICENSE</a>. The following third-party dependencies are included in the
+        repository under their own licenses:</p>
+        <ul>
+        <li><a href="lib/softfloat/softfloat.c"><code>lib/softfloat/softfloat.c</code></a></li>
+        <li><a href="lib/zstd/zstddeclib.c"><code>lib/zstd/zstddeclib.c</code></a></li>
+        <li><a href="tests/kvm-unit-tests"><code>tests/kvm-unit-tests/</code></a></li>
+        <li><a href="tests/qemutests"><code>tests/qemutests/</code></a></li>
+        </ul>
+        <h2 id="credits">Credits</h2>
+        <ul>
+        <li>CPU test cases via <a href="https://wiki.qemu.org/Main_Page">QEMU</a></li>
+        <li>More tests via <a href="https://www.linux-kvm.org/page/KVM-unit-tests">kvm-unit-tests</a></li>
+        <li><a href="https://github.com/facebook/zstd">zstd</a> support is included for better compression of state images</li>
+        <li><a href="http://www.jhauser.us/arithmetic/SoftFloat.html">Berkeley SoftFloat</a> is included to precisely emulate 80-bit floating point numbers</li>
+        <li><a href="https://github.com/s-macke/jor1k">The jor1k project</a> for 9p, filesystem and uart drivers</li>
+        <li><a href="https://winworldpc.com/">WinWorld</a> sources of some old operating systems</li>
+        <li><a href="https://www.os2museum.com/">OS/2 Museum</a> sources of some old operating systems</li>
+        <li><a href="https://archiveos.org/">ArchiveOS</a> sources of several operating systems</li>
+        </ul>
+        <h2 id="more-questions-">More questions?</h2>
+        <p>Shoot me an email to <code>copy@copy.sh</code>. Please report bugs on GitHub.</p>
+        <h2 id="author">Author</h2>
+        <p>Fabian Hemmer (<a href="https://copy.sh/">https://copy.sh/</a>, <code>copy@copy.sh</code>)</p>
+        
